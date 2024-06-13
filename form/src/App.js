@@ -6,19 +6,21 @@ function App() {
   const [formData,setFormData] = useState({
     firstName:"",lastName:"",email:"",country:"India",address:"" , city:"",state:"",zipcode:"",comment:false,
     candidate:false,offer:false,
-    pn:""
+    a:""
   })
 
   function changeHandler(event){
-    console.log(formData);
+  
     const{name,value,checked,type} = event.target;
     setFormData((prev)=>({
       ...prev,
-      [name]:type==='checkbox' || 'radio'?checked:value
+      [name]:type==='checkbox'?checked:value
     }))
     
   }
-  function submitHandler(){
+  function submitHandler(event){
+    event.preventDefault();
+    console.log(formData);
     
   }
   return (
@@ -26,7 +28,7 @@ function App() {
       <form className='form' onSubmit={submitHandler}>
         <div className='name'>
           <label htmlFor="firstName" >First Name</label>
-          <input type='text' placeholder="Suraj" id="firstName" name="firstName" value={formData.firstName} onChange={changeHandler}/>
+          <input  placeholder="Suraj" id="firstName" name="firstName" value={formData.firstName} onChange={changeHandler}/>
         </div>
           
         <div className='name'>
@@ -101,17 +103,17 @@ function App() {
           <div>
             
             <div>
-              <input type='radio' id='everything' name='pn' value="Everything" onChange={changeHandler}></input>
+              <input type='radio' id='everything' name='a' value="Everything" onChange={changeHandler}></input>
               <label htmlFor='everything'>Everything</label>
             </div>
 
             <div>
-              <input type='radio' id='sae' name='pn' value="Same as Email" onChange={changeHandler}></input>
+              <input type='radio' id='sae' name='a'  value="Same as Email" onChange={changeHandler}></input>
               <label htmlFor='sae'>Same as Email</label>
             </div>
 
             <div>
-              <input type='radio' id='npn' name='pn' value="No Push Notification" onChange={changeHandler}></input>
+              <input type='radio' id='npn' name='a'  value="No Push Notification" onChange={changeHandler}></input>
               <label htmlFor='npn'>No Push Notification</label>
             </div>
           </div>
