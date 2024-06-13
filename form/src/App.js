@@ -1,28 +1,47 @@
-import logo from './logo.svg';
 import './App.css';
+import {useState} from 'react';
 
 function App() {
+  
+  const [formData,setFormData] = useState({
+    firstName:"",lastName:"",email:"",country:"India",address:"" , city:"",state:"",zipcode:"",comment:false,
+    candidate:false,offer:false,
+    pn:""
+  })
+
+  function changeHandler(event){
+    console.log(formData);
+    const{name,value,checked,type} = event.target;
+    setFormData((prev)=>({
+      ...prev,
+      [name]:type==='checkbox' || 'radio'?checked:value
+    }))
+    
+  }
+  function submitHandler(){
+    
+  }
   return (
     <div className="App">
-      <form className='form'>
+      <form className='form' onSubmit={submitHandler}>
         <div className='name'>
           <label htmlFor="firstName" >First Name</label>
-          <input placeholder="Suraj" id="firstName" name="firstName"/>
+          <input type='text' placeholder="Suraj" id="firstName" name="firstName" value={formData.firstName} onChange={changeHandler}/>
         </div>
           
         <div className='name'>
           <label htmlFor="lastName" >Last Name</label>
-          <input placeholder="Gund" id="lastName" name="lastName"/>
+          <input type='text' placeholder="Gund" id="lastName" name="lastName" value={formData.lastName} onChange={changeHandler}/>
         </div>
 
         <div className='name'>
           <label htmlFor="email" >Email Address</label>
-          <input placeholder="abc@gmail.com" id="email" name="email"/>
+          <input type='text' placeholder="abc@gmail.com" id="email" name="email" value={formData.email} onChange={changeHandler}/>
         </div>
 
         
         <label className='name' htmlFor='country'>Country</label>
-        <select id='country'>
+        <select id='country' name='country' onChange={changeHandler} value={formData.country}> 
           <option>India</option>
           <option>Pakistan</option>
           <option>Bangladesh</option>
@@ -32,14 +51,13 @@ function App() {
         <div className='name'>
           <label htmlFor='address'>Street Address
           </label>
-          <textarea id='address' placeholder='123 Main Street'> 
-
+          <textarea type='text' id='address' name = 'address' value={formData.address} placeholder='123 Main Street' onChange={changeHandler}> 
           </textarea>
         </div>
 
 
         <label className='name' htmlFor='city'>City</label>
-        <select id='city'>
+        <select id='city' name='city' value={formData.city} onChange={changeHandler}>
           <option>Solapur</option>
           <option>Mohol</option>
           <option>Pandharpur</option>
@@ -48,12 +66,12 @@ function App() {
 
         <div className='name'>
           <label>State/Province</label>
-          <input id='state' placeholder='Maharashtra'></input>
+          <input id='state' placeholder='Maharashtra' name='state' value={formData.state} onChange={changeHandler}></input>
         </div>
 
         <div className='name'>
           <label htmlFor='zipcode'>ZipCode</label>
-          <input id='zipcode' placeholder='413253'></input>
+          <input id='zipcode' placeholder='413253' name='zipcode' value={formData.zipcode} onChange={changeHandler}></input>
         </div>
 
         <label htmlFor='check'>By Email</label>
@@ -61,25 +79,45 @@ function App() {
         <div id='check' className='name' >
 
           <div>
-            <input id='notify' name='comments' type='checkbox'></input>
-            <label htmlFor='comment'>Comments</label>
+            <input id='comment' name='comment' type='checkbox' checked={formData.comment} onChange={changeHandler}></input>
+            <label htmlFor='comment'>Comment</label>
           </div>
+
           <div>
-            <input id='candidate' name='comments' type='checkbox'></input>
+            <input id='candidate' name='candidate' type='checkbox' checked={formData.candidate} onChange={changeHandler}></input>
             <label htmlFor='candidate' >Candidate</label>
-
           </div>
 
           <div>
-
-            <input id='offer' name='comments' type='checkbox'></input>
+            <input id='offer' name='offer' type='checkbox' checked={formData.offer} onChange={changeHandler}></input>
             <label htmlFor='offer' >Offer</label>
-
           </div>
-          
-
           
         </div>
+
+        <fieldset>
+          <legend>Push Notification</legend>
+
+          <div>
+            
+            <div>
+              <input type='radio' id='everything' name='pn' value="Everything" onChange={changeHandler}></input>
+              <label htmlFor='everything'>Everything</label>
+            </div>
+
+            <div>
+              <input type='radio' id='sae' name='pn' value="Same as Email" onChange={changeHandler}></input>
+              <label htmlFor='sae'>Same as Email</label>
+            </div>
+
+            <div>
+              <input type='radio' id='npn' name='pn' value="No Push Notification" onChange={changeHandler}></input>
+              <label htmlFor='npn'>No Push Notification</label>
+            </div>
+          </div>
+        </fieldset>
+
+        <button className='btn'>Save</button>
 
   
       

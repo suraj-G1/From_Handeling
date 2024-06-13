@@ -19,6 +19,17 @@
   font-weight: 600;
 }
 
+.btn{
+  width: 50px;
+  background-color: blue;
+  color: white;
+  border-radius:5px;
+}
+.btn:hover{
+  width: 50px;
+  background-color: blueviolet;
+}
+
 
 
 
